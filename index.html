@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ReLoop - Premium Peer-to-Peer Resale Marketplace. Sell your pre-loved fashion, tech, and accessories.">
+    <title>ReLoop | Curated Resale Marketplace</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Promotion Bar -->
+    <div class="promo-bar">
+        <p>✨ Earn money by selling items you don't use. <strong>List an item in 60 seconds!</strong></p>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                </svg>
+                <span>ReLoop</span>
+            </a>
+            
+            <div class="search-bar-container">
+                <input type="text" id="search-input" placeholder="Search clothes, tech, bags...">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+
+            <div class="header-actions">
+                <button class="btn btn-accent" id="sell-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Sell Item
+                </button>
+                
+                <button class="cart-trigger" id="cart-btn" aria-label="Cart">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <span class="hero-badge">Circular Fashion & Goods</span>
+            <h1>Give Pre-Loved <br>A Second Life.</h1>
+            <p>Buy curated vintage styles, verified gadgets, and lifestyle essentials from trusted sellers. Clear carbon impact, high style.</p>
+            <div class="hero-buttons">
+                <a href="#shop" class="btn btn-primary">Browse Market</a>
+                <button class="btn btn-outline" id="hero-sell-btn">Start Listing</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketplace Hub -->
+    <main class="market-section" id="shop">
+        <div class="container">
+            <div class="market-layout">
+                
+                <!-- Filter Sidebar -->
+                <aside class="filter-sidebar">
+                    <h3>Filter Catalog</h3>
+                    
+                    <div class="filter-group">
+                        <h4>Categories</h4>
+                        <div class="filter-options">
+                            <button class="filter-link active" data-category="all">All Items</button>
+                            <button class="filter-link" data-category="fashion">Vintage Fashion</button>
+                            <button class="filter-link" data-category="tech">Refurbished Tech</button>
+                            <button class="filter-link" data-category="bags">Bags & Wallets</button>
+                            <button class="filter-link" data-category="shoes">Shoes</button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Product Catalog Feed -->
+                <div class="catalog-content">
+                    <div class="catalog-header">
+                        <h2>Curated Listings</h2>
+                        <span id="items-count">6 items listed</span>
+                    </div>
+                    
+                    <div class="listings-grid" id="listings-container">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Slide-Out Cart -->
+    <div class="drawer-overlay" id="cart-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="drawer-header">
+            <h3>Cart</h3>
+            <button class="close-btn" id="close-cart-btn">✕</button>
+        </div>
+        <div class="drawer-body" id="cart-items">
+            <!-- Dynamically populated -->
+        </div>
+        <div class="drawer-footer">
+            <div class="pricing-summary">
+                <div class="price-row">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">$0.00</span>
+                </div>
+                <div class="price-row total-row">
+                    <span>Total</span>
+                    <span id="cart-total">$0.00</span>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Sell Item Modal -->
+    <div class="modal-overlay" id="sell-modal">
+        <div class="modal-container">
+            <button class="modal-close" id="close-sell-btn">✕</button>
+            <div class="modal-content">
+                <h2>List an Item for Sale</h2>
+                <form id="sell-form" class="sell-form">
+                    <div class="form-group">
+                        <label for="item-title">Title</label>
+                        <input type="text" id="item-title" required placeholder="e.g., Retro Leather Jacket">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="item-price">Price ($)</label>
+                            <input type="number" id="item-price" step="0.01" required placeholder="29.99">
+                        </div>
+                        <div class="form-group">
+                            <label for="item-category">Category</label>
+                            <select id="item-category" required>
+                                <option value="fashion">Vintage Fashion</option>
+                                <option value="tech">Refurbished Tech</option>
+                                <option value="bags">Bags & Wallets</option>
+                                <option value="shoes">Shoes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-condition">Condition</label>
+                        <select id="item-condition" required>
+                            <option value="New">Brand New (Unused)</option>
+                            <option value="Like New">Like New (Mint Condition)</option>
+                            <option value="Very Good">Very Good (Lightly used)</option>
+                            <option value="Good">Good (Minor wear)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-desc">Description</label>
+                        <textarea id="item-desc" rows="4" required placeholder="Describe style, flaws, details..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-image">Preset Image Preview</label>
+                        <select id="item-image" required>
+                            <option value="jacket">Brown Leather Jacket</option>
+                            <option value="bag">Vintage Backpack</option>
+                            <option value="headphones">Premium Headphones</option>
+                            <option value="boots">Minimalist Suede Boots</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-accent btn-block">Post Listing</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal-container">
+            <button class="modal-close" id="close-checkout-btn">✕</button>
+            <div class="modal-content">
+                <h2>Secure Purchase</h2>
+                <div class="checkout-layout">
+                    <form id="checkout-form" class="checkout-form">
+                        <div class="form-group">
+                            <label for="co-name">Full Name</label>
+                            <input type="text" id="co-name" required placeholder="Sarah Connor">
+                        </div>
+                        <div class="form-group">
+                            <label for="co-address">Shipping Address</label>
+                            <input type="text" id="co-address" required placeholder="456 Oak Avenue, Apt 2">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="co-card">Credit Card Number</label>
+                                <input type="text" id="co-card" required placeholder="1111 2222 3333 4444" maxlength="19">
+                            </div>
+                            <div class="form-group">
+                                <label for="co-cvv">CVV</label>
+                                <input type="password" id="co-cvv" required placeholder="***" maxlength="3">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Confirm Payment</button>
+                    </form>
+                    <div class="checkout-summary">
+                        <h4>Order Total</h4>
+                        <h2 id="checkout-total-amt" class="checkout-total-amt">$0.00</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Screen -->
+    <div class="modal-overlay" id="success-modal">
+        <div class="modal-container success-container">
+            <div class="success-icon">✓</div>
+            <h2>Order Confirmed!</h2>
+            <p>Your resale items have been reserved. The seller will dispatch shipping tracking shortly.</p>
+            <button class="btn btn-primary" id="success-close">Go Back</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                        </svg>
+                        <span>ReLoop</span>
+                    </a>
+                    <p>Building the standard peer-to-peer network for high-end fashion and refined lifestyle reselling.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Categories</h4>
+                    <a href="#shop">Fashion</a>
+                    <a href="#shop">Refurbished Tech</a>
+                    <a href="#shop">Bags</a>
+                    <a href="#shop">Shoes</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Commitment</h4>
+                    <p>Verified sellers, secure escrow checkout, and 100% biodegradable carbon-offset shipping.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ReLoop Marketplace. Handcrafted with precision.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
